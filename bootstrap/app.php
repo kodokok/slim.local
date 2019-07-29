@@ -1,7 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
-
 $app = new \Slim\App([
     'settings' => [
         'displayErrorDetails' => true,
@@ -12,7 +10,7 @@ $container = $app->getContainer();
 
 // Register component on container
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig(__DIR__ . '/resources/views', [
+    $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views', [
         'cache' => false,
     ]);
 
@@ -24,16 +22,4 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$app->get('/contact', function($request, $response) {
-    return $this->view->render($response, 'contact.twig');
-});
-
-$app->get('/contact/confirm', function($request, $response) {
-    return $this->view->render($response, 'contact_confirm.twig');
-});
-
-$app->post('/contact', function($request, $response) {
-    return $response->withRedirect('http://localhost/slim.local/contact/confirm');
-})->setName('contact');
-
-$app->run();
+require __DIR__ . '/../routes/web.php';
