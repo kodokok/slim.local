@@ -20,8 +20,12 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$app->get('/', function() {
-    
+$app->get('/', function($request, $response) {
+    return $this->view->render($response, 'home.twig');
+});
+
+$app->get('/users', function($request, $response) {
+    return $this->view->render($response, 'users.twig');
 });
 
 $app->run();
