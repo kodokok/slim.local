@@ -25,7 +25,15 @@ $app->get('/', function($request, $response) {
 });
 
 $app->get('/users', function($request, $response) {
-    return $this->view->render($response, 'users.twig');
+    $users = [
+        ['username' => 'john_snow'],
+        ['username' => 'andre_star'],
+        ['username' => 'remember_09'],
+    ];
+
+    return $this->view->render($response, 'users.twig', [
+        'users' => $users,
+    ]);
 });
 
 $app->run();
