@@ -8,6 +8,10 @@ $app = new \Slim\App([
 
 $container = $app->getContainer();
 
+$container['db'] = function() {
+    return new PDO('mysql:dbname=slim;host=localhost', 'root', 'mysql');
+};
+
 // Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views', [
