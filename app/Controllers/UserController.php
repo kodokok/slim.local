@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use PDO;
+use App\Models\User;
+
 class UserController extends Controller
 {
     public function index($request, $response)
     {
-        return $this->c->view->render($response, 'users/index.twig');
-    }
+        $users = $this->c->db->query("SELECT * FROM users")->fetchAll(PDO::FETCH_CLASS, User::class);
 
-    public function show($request, $response)
-    {
-        return $this->c->view->render($response, 'users/index.twig');
+        // var_dump($users);
+        // die();
+
+        return $this->c->view->render($response, 'users/index.twig', compact('users'));
     }
 }
